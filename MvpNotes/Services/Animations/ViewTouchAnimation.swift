@@ -1,7 +1,7 @@
 import UIKit
 
 class ViewTouchAnimation {
-    private let view: UIView
+    private weak var view: UIView?
 
     private let touchDuration: TimeInterval
     private let untouchDuration: TimeInterval
@@ -31,7 +31,7 @@ class ViewTouchAnimation {
         animator?.stopAnimation(true)
 
         animator = UIViewPropertyAnimator(duration: duration, curve: .easeOut) { [weak self] in
-            self?.view.transform = CGAffineTransform(scaleX: scale, y: scale)
+            self?.view?.transform = CGAffineTransform(scaleX: scale, y: scale)
         }
         animator?.addCompletion { [weak self] _ in
             self?.animator = nil
