@@ -9,6 +9,8 @@ class ImagesCache {
 
     private let imageAddedSubject = PassthroughSubject<(id: String, image: UIImage), Never>()
 
+    private init() { }
+
     subscript(id: String) -> UIImage? {
         get {
             cached(for: id)
