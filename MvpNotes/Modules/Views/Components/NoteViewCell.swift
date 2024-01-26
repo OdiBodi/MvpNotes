@@ -71,7 +71,7 @@ extension NoteViewCell {
 
 extension NoteViewCell {
     private func addSubviews() {
-        addSubview(horizontalStack)
+        contentView.addSubview(horizontalStack)
 
         horizontalStack.addArrangedSubview(iconView)
         horizontalStack.addArrangedSubview(descriptionLabel)
