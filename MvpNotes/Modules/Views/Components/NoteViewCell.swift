@@ -106,7 +106,7 @@ extension NoteViewCell {
             ImagesCache.shared.imageAdded.filter { (id, _) in
                 id == model.imageId
             }.sink { [weak self] (_, image) in
-                DispatchQueue.main.async { [weak self] in
+                DispatchQueue.main.async {
                     self?.iconImage.image = image
                 }
                 self?.subscriptions.removeAll()
