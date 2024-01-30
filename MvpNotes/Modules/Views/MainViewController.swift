@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class MainViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class MainViewController: UIViewController {
     private lazy var notesView: UITableView = {
         let table = UITableView(frame: .zero, style: .plain)
         table.dataSource = self
@@ -81,7 +81,7 @@ extension MainViewController {
 
 // MARK: - UITableViewDataSource
 
-extension MainViewController {
+extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         notes?.count ?? 0
     }
@@ -115,7 +115,7 @@ extension MainViewController {
 
 // MARK: - UITableViewDelegate
 
-extension MainViewController {
+extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 

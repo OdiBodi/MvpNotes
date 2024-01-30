@@ -2,7 +2,7 @@ import UIKit
 import Combine
 import PhotosUI
 
-class NoteViewController: UIViewController, UITextViewDelegate, PHPickerViewControllerDelegate {
+class NoteViewController: UIViewController {
     private lazy var verticalStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
@@ -136,7 +136,7 @@ extension NoteViewController {
 
 // MARK: - UITextViewDelegate
 
-extension NoteViewController {
+extension NoteViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         updateApplyItemButtonEnabled()
     }
@@ -156,7 +156,7 @@ extension NoteViewController {
 
 // MARK: - PHPickerViewControllerDelegate
 
-extension NoteViewController {
+extension NoteViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         dismiss(animated: true)
 
