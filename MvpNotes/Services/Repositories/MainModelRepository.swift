@@ -17,6 +17,7 @@ class MainModelRepository {
         return nil
     }
 
+    @discardableResult
     func save(model: MainModel) -> Bool {
         do {
             let data = try JSONEncoder().encode(model)
