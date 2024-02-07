@@ -2,14 +2,7 @@ import UIKit
 import SnapKit
 
 class MainViewController: UIViewController {
-    private lazy var notesView: UITableView = {
-        let table = UITableView(frame: .zero, style: .plain)
-        table.dataSource = self
-        table.delegate = self
-        table.register(NoteViewCell.self, forCellReuseIdentifier: "NoteViewCell")
-        table.separatorInset = UIEdgeInsets(top: 0, left: 106, bottom: 0, right: 0)
-        return table
-    }()
+    private lazy var notesView = initializeNotesView()
 
     private var presenter: MainPresenter?
     private var notes: [NoteModel]?
@@ -58,6 +51,15 @@ extension MainViewController {
 // MARK: - Subviews
 
 extension MainViewController {
+    private func initializeNotesView() -> UITableView {
+        let table = UITableView(frame: .zero, style: .plain)
+        table.dataSource = self
+        table.delegate = self
+        table.register(NoteViewCell.self, forCellReuseIdentifier: "NoteViewCell")
+        table.separatorInset = UIEdgeInsets(top: 0, left: 106, bottom: 0, right: 0)
+        return table
+    }
+
     private func addSubviews() {
         view.addSubview(notesView)
     }

@@ -3,26 +3,9 @@ import Combine
 import PhotosUI
 
 class NoteViewController: UIViewController {
-    private lazy var verticalStack: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.alignment = .fill
-        stack.distribution = .fill
-        stack.spacing = 10
-        return stack
-    }()
-
-    private lazy var imageView: NoteImageView = {
-        return NoteImageView()
-    }()
-
-    private lazy var descriptionText: UITextView = {
-        let text = UITextView()
-        text.delegate = self
-        text.font = .systemFont(ofSize: 24)
-        return text
-    }()
+    private lazy var verticalStack = initializeVerticalStack()
+    private lazy var imageView = initializeImageView()
+    private lazy var descriptionText = initializeDescriptionText()
 
     private var presenter: NotePresenter?
     private var subscriptions = Set<AnyCancellable>()
@@ -93,6 +76,27 @@ extension NoteViewController {
 // MARK: - Subviews
 
 extension NoteViewController {
+    private func initializeVerticalStack() -> UIStackView {
+        let stack = UIStackView()
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.axis = .vertical
+        stack.alignment = .fill
+        stack.distribution = .fill
+        stack.spacing = 10
+        return stack
+    }
+
+    private func initializeImageView() -> NoteImageView {
+        NoteImageView()
+    }
+
+    private func initializeDescriptionText() -> UITextView {
+        let text = UITextView()
+        text.delegate = self
+        text.font = .systemFont(ofSize: 24)
+        return text
+    }
+
     private func addSubviews() {
         view.addSubview(verticalStack)
         verticalStack.addArrangedSubview(imageView)

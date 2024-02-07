@@ -2,27 +2,8 @@ import UIKit
 import Combine
 
 class NoteImageView: UIView {
-    private lazy var noteImage: UIImageView = {
-        let image = UIImageView()
-        image.backgroundColor = .systemGray6
-        image.layer.cornerRadius = 10
-        image.clipsToBounds = true
-        return image
-    }()
-
-    private lazy var placeholderImage: UIImageView = {
-        let image = UIImage(systemName: "plus.circle.fill")
-
-        let view = UIImageView(image: image)
-        view.isUserInteractionEnabled = true
-
-        let tapGestureRecognizer = UILongPressGestureRecognizer(target: self,
-                                                                action: #selector(onPlaceholderImageTapped))
-        tapGestureRecognizer.minimumPressDuration = 0
-        view.addGestureRecognizer(tapGestureRecognizer)
-
-        return view
-    }()
+    private lazy var noteImage = initializeNoteImage()
+    private lazy var placeholderImage = initializePlaceholderImage()
 
     private var placeholderTouchAnimation: ViewTouchAnimation?
 
@@ -59,6 +40,28 @@ extension NoteImageView {
 // MARK: - Subviews
 
 extension NoteImageView {
+    private func initializeNoteImage() -> UIImageView {
+        let image = UIImageView()
+        image.backgroundColor = .systemGray6
+        image.layer.cornerRadius = 10
+        image.clipsToBounds = true
+        return image
+    }
+
+    private func initializePlaceholderImage() -> UIImageView {
+        let image = UIImage(systemName: "plus.circle.fill")
+
+        let view = UIImageView(image: image)
+        view.isUserInteractionEnabled = true
+
+        let gestureRecognizer = UILongPressGestureRecognizer(target: self,
+                                                             action: #selector(onPlaceholderImageTapped))
+        gestureRecognizer.minimumPressDuration = 0
+        view.addGestureRecognizer(gestureRecognizer)
+
+        return view
+    }
+
     private func addSubviews() {
         addSubview(noteImage)
         addSubview(placeholderImage)
