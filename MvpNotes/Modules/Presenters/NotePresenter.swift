@@ -3,7 +3,7 @@ import UIKit
 class NotePresenter: BaseCoordinatorModule<(Int, NoteModel), Never> {
     private let noteIndex: Int
     private let model: NoteModel
-    private let view: NoteViewController
+    private weak var view: NoteViewController?
 
     init(noteIndex: Int, model: NoteModel, view: NoteViewController) {
         self.noteIndex = noteIndex

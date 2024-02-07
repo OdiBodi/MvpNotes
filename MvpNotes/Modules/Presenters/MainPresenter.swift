@@ -3,7 +3,7 @@ import UIKit
 
 class MainPresenter: BaseCoordinatorModule<(Int, NoteModel), Never> {
     private var model: MainModel
-    private let view: MainViewController
+    private weak var view: MainViewController?
 
     init(model: MainModel, view: MainViewController) {
         self.model = model
@@ -35,13 +35,17 @@ extension MainPresenter {
     }
 
     func updateNote(noteIndex: Int, noteModel: NoteModel) {
+        guard let view = view else {
+            return
+        }
+
         if noteIndex > -1 {
             model.notes[noteIndex] = noteModel
         } else {
             model.notes.append(noteModel)
         }
 
-        self.view.updateModel(self.model)
+        view.updateModel(self.model)
 
         DispatchQueue.global().async { [weak self] in
             guard let self = self else {
