@@ -55,7 +55,7 @@ extension MainViewController {
         let table = UITableView(frame: .zero, style: .plain)
         table.dataSource = self
         table.delegate = self
-        table.register(NoteViewCell.self, forCellReuseIdentifier: "NoteViewCell")
+        table.register(NoteViewCell.self, forCellReuseIdentifier: NoteViewCell.id)
         table.separatorInset = UIEdgeInsets(top: 0, left: 106, bottom: 0, right: 0)
         return table
     }
@@ -92,7 +92,7 @@ extension MainViewController: UITableViewDataSource {
         let index = indexPath.item
         let model = notes?[index] ?? NoteModel(imageId: "ERROR", description: "ERROR")
 
-        let cell = tableView.dequeueReusableCell(withIdentifier: "NoteViewCell", for: indexPath) as! NoteViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: NoteViewCell.id, for: indexPath) as! NoteViewCell
         cell.accessoryType = .disclosureIndicator
         cell.initialize(model: model)
 

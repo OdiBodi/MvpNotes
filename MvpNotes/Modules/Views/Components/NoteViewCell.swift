@@ -2,6 +2,8 @@ import UIKit
 import Combine
 
 class NoteViewCell: UITableViewCell {
+    static let id = "\(NoteViewCell.self)"
+    
     private lazy var horizontalStack = initializeHorizontalStack()
     private lazy var iconView = initializeIconView()
     private lazy var iconImage = initializeIconImage()
