@@ -2,7 +2,7 @@ import Combine
 import UIKit
 
 class ApplicationCoordinator: BaseCoordinator<Void, Never> {
-    private let navigationController: UINavigationController
+    private weak var navigationController: UINavigationController?
 
     init(navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -23,7 +23,7 @@ extension ApplicationCoordinator {
             self?.openNoteModule(mainPresenter: mainPresenter, noteIndex: noteIndex, noteModel: noteModel)
         }.store(in: &subscriptions)
 
-        navigationController.pushViewController(mainView, animated: false)
+        navigationController?.pushViewController(mainView, animated: false)
     }
 
     private func openNoteModule(mainPresenter: MainPresenter, noteIndex: Int, noteModel: NoteModel) {
@@ -32,11 +32,11 @@ extension ApplicationCoordinator {
         var subscription: AnyCancellable!
         subscription = notePresenter.completion.sink { [weak self] (noteIndex, noteModel) in
             mainPresenter.updateNote(noteIndex: noteIndex, noteModel: noteModel)
-            self?.navigationController.popViewController(animated: true)
+            self?.navigationController?.popViewController(animated: true)
             self?.subscriptions.remove(subscription)
         }
         subscriptions.insert(subscription)
 
-        navigationController.show(noteView, sender: mainPresenter)
+        navigationController?.show(noteView, sender: mainPresenter)
     }
 }
