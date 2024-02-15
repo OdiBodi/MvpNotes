@@ -35,7 +35,7 @@ extension MainPresenter {
     }
 
     func updateNote(noteIndex: Int, noteModel: NoteModel) {
-        guard let view = view else {
+        guard let view else {
             return
         }
 
@@ -45,10 +45,10 @@ extension MainPresenter {
             model.notes.append(noteModel)
         }
 
-        view.updateModel(self.model)
+        view.updateModel(model)
 
         DispatchQueue.global().async { [weak self] in
-            guard let self = self else {
+            guard let self else {
                 return
             }
             MainModelRepository().save(model: self.model)

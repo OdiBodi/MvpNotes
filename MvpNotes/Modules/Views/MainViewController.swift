@@ -121,7 +121,7 @@ extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
 
-        guard let navigationController = navigationController else {
+        guard let navigationController else {
             return
         }
 
@@ -138,7 +138,7 @@ extension MainViewController: UITableViewDelegate {
 
 extension MainViewController {
     @objc func onAddBarButtonItemTapped() {
-        guard let navigationController = navigationController else {
+        guard let navigationController else {
             return
         }
         presenter?.addNote(navigationController: navigationController)

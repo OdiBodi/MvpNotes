@@ -3,8 +3,6 @@ import UIKit
 import Combine
 
 class ImagesCache {
-    static let shared = ImagesCache()
-
     private let cache = NSCache<NSString, UIImage>()
 
     private let imageAddedSubject = PassthroughSubject<(id: String, image: UIImage), Never>()
@@ -19,6 +17,12 @@ class ImagesCache {
             cache(for: id, image: image)
         }
     }
+}
+
+// MARK: - Static
+
+extension ImagesCache {
+    static let shared = ImagesCache()
 }
 
 // MARK: - Publishers
@@ -62,11 +66,7 @@ extension ImagesCache {
             return
         }
 
-        guard let image = image else {
-            return
-        }
-
-        guard let imageData = image.pngData() else {
+        guard let image, let imageData = image.pngData() else {
             return
         }
 
